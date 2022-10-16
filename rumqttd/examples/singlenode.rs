@@ -3,8 +3,14 @@ use rumqttd::{Broker, Config, Notification};
 use std::thread;
 
 #[cfg(not(target_env = "msvc"))]
+#[cfg(feature = "jemallocator")]
 #[global_allocator]
 static ALLOC: jemallocator::Jemalloc = jemallocator::Jemalloc;
+
+#[cfg(not(target_env = "msvc"))]
+#[cfg(feature = "mimalloc")]
+#[global_allocator]
+static ALLOC: mimalloc::MiMalloc = mimalloc::MiMalloc;
 
 fn main() {
     pretty_env_logger::init();
