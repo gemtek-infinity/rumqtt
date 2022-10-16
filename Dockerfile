@@ -10,6 +10,6 @@ RUN cargo build --release -p rumqttd --features="mimalloc"
 FROM alpine:3.16
 
 COPY --from=builder /usr/src/rumqtt/target/release/rumqttd /usr/local/bin/rumqttd
-COPY ./rumqttd/demo.toml .
+COPY ./rumqttd/demo.toml runconfig.toml
 ENV RUST_LOG="info"
-ENTRYPOINT ["rumqttd"]
+ENTRYPOINT ["rumqttd", "--config", "runconfig.toml"]

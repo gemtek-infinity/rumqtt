@@ -44,8 +44,6 @@ fn main() {
 
     let config = config.try_deserialize().unwrap();
 
-    println!("{:#?}", config);
-
     let mut broker = Broker::new(config);
     broker.start().unwrap();
 }
